@@ -6,8 +6,8 @@
     ?>
 
         	<div id="slideleft-main">
-                <img src="upload/tintuc/<?php echo  $row_tinmoinhat_mottin['urlHinh'] ?>"  /><br />
-                <h2 class="title"><a href="index.php?p=chitiettin&idTin=<?php echo  $row_tinmoinhat_mottin['idTin'] ?>"><?php echo  $row_tinmoinhat_mottin['TieuDe'] ?></a> </h2>
+                <img style="width: 485px; height: 300px;"  src="<?php echo  $row_tinmoinhat_mottin['urlHinh'] ?>"  /><br />
+                <h3 class="title"><a href="index.php?p=chitiettin&idTin=<?php echo  $row_tinmoinhat_mottin['idTin'] ?>"><?php echo  $row_tinmoinhat_mottin['TieuDe'] ?></a> </h3>
                 <div class="des">
                     <?php echo  $row_tinmoinhat_mottin['TomTat'] ?> 
                 </div>

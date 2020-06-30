@@ -1,6 +1,6 @@
 <div class="thongtin-title">Thông tin doanh nghiệp</div>
 <div class="thongtin-content">
-	<!-- it works the same with all jquery version from 1.x to 2.x -->
+    <!-- it works the same with all jquery version from 1.x to 2.x -->
     <script type="text/javascript" src="jquery-slider-master/js/jquery-1.9.1.min.js"></script>
     <!-- use jssor.slider.mini.js (39KB) or jssor.sliderc.mini.js (31KB, with caption, no slideshow) or jssor.sliders.mini.js (26KB, no caption, no slideshow) instead for release -->
     <!-- jssor.slider.mini.js = jssor.sliderc.mini.js = jssor.sliders.mini.js = (jssor.core.js + jssor.utils.js + jssor.slider.js) -->
@@ -15,12 +15,12 @@
                 $AutoPlayInterval: 4000,                            //[Optional] Interval (in milliseconds) to go for next slide since the previous stopped if the slider is auto playing, default value is 3000
                 $PauseOnHover: 1,                               //[Optional] Whether to pause when mouse over if a slider is auto playing, 0 no pause, 1 pause for desktop, 2 pause for touch device, 3 pause for desktop and touch device, default value is 1
 
-                $ArrowKeyNavigation: true,   			            //[Optional] Allows keyboard (arrow key) navigation or not, default value is false
+                $ArrowKeyNavigation: true,                          //[Optional] Allows keyboard (arrow key) navigation or not, default value is false
                 $SlideDuration: 300,                                //[Optional] Specifies default duration (swipe) for slide in milliseconds, default value is 500
                 $MinDragOffsetToSlide: 20,                          //[Optional] Minimum drag offset to trigger slide , default value is 20
                 $SlideWidth: 200,                                   //[Optional] Width of every slide in pixels, default value is width of 'slides' container
                 //$SlideHeight: 150,                                //[Optional] Height of every slide in pixels, default value is height of 'slides' container
-                $SlideSpacing: 3, 					                //[Optional] Space between each slide in pixels, default value is 0
+                $SlideSpacing: 3,                                   //[Optional] Space between each slide in pixels, default value is 0
                 $DisplayPieces: 4,                                  //[Optional] Number of pieces to display (the slideshow would be disabled if the value is set to greater than 1), the default value is 1
                 $ParkingPosition: 0,                              //[Optional] The offset position to park slide (this options applys only when slideshow disabled), default value is 0.
                 $UISearchMode: 1,                                   //[Optional] The way (0 parellel, 1 recursive, default value is 1) to search UI components (slides container, loading screen, navigator container, arrow navigator container, thumbnail navigator container etc).
@@ -87,14 +87,21 @@
 
         <!-- Slides Container -->
         <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 1000px; height: 150px; overflow: hidden;">
-            <?php  
-                $quangcao = QuangCao(2);
-                while($row_quangcao = mysqli_fetch_array($quangcao)) {
-
-
-            ?>
-            <div><img u="image" src="upload/quangcao/<?php echo $row_quangcao['urlHinh'] ?>" /></div>
-            <?php  }?>
+            <div><img u="image" src="images/1.png" /></div>
+            <div><img u="image" src="images/2.png" /></div>
+            <div><img u="image" src="images/3.png" /></div>
+            <div><img u="image" src="images/1.png" /></div>
+            <div><img u="image" src="images/2.png" /></div>
+            <div><img u="image" src="images/3.png" /></div>
+            <div><img u="image" src="images/1.png" /></div>
+            <div><img u="image" src="images/2.png" /></div>
+            <div><img u="image" src="images/3.png" /></div>
+            <div><img u="image" src="images/1.png" /></div>
+            <div><img u="image" src="images/2.png" /></div>
+            <div><img u="image" src="images/3.png" /></div>
+            <div><img u="image" src="images/1.png" /></div>
+            <div><img u="image" src="images/2.png" /></div>
+            <div><img u="image" src="images/3.png" /></div>
         </div>
         
         <!-- Bullet Navigator Skin Begin -->
@@ -138,9 +145,9 @@
             */
             .jssora03l, .jssora03r, .jssora03ldn, .jssora03rdn
             {
-            	position: absolute;
-            	cursor: pointer;
-            	display: block;
+                position: absolute;
+                cursor: pointer;
+                display: block;
                 background: url(jquery-slider-master/img/a03.png) no-repeat;
                 overflow:hidden;
             }

@@ -46,6 +46,31 @@
 	    return mysqli_fetch_array($result);
 	}
 
+	//Quan lý tin
+	function DanhSachTin() {
+		$conn = myConnect();
+	    $qr = "
+	            select tin.*, TenTL, Ten from tin, theloai, loaitin
+	            where tin.idTL = theloai.idTL and tin.idLT = loaitin.idLT
+	            order by ngay desc
+	            limit 0, 30
+	    ";
+		$result = mysqli_query($conn, $qr);
+
+	    return $result;
+	}
+
+	function ChiTietTin($idTin) {
+		$conn = myConnect();
+	    $qr = "
+	            select * from tin
+	            where idTin = $idTin
+	    ";
+		$result = mysqli_query($conn, $qr);
+
+	    return mysqli_fetch_array($result);
+	}
+
 	function stripUnicode($str) {
 		if(!$str) return false;
 		$unicode = array(

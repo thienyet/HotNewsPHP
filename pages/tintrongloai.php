@@ -12,7 +12,7 @@
 </div>
 
 <?php  
-    $sotin1trang = 4;
+    $sotin1trang = 8;
 
     if(isset($_GET["trang"])) {
         $trang = $_GET["trang"];
@@ -36,8 +36,8 @@
         <div class="cat-content">
         	<div class="col0 col1">
             	<div class="news">
-                    <h3 class="title" ><a href="index.php?p=chitiettin&idTin=<?php echo $row_tin['idTin'] ?>"><?php echo $row_tin['TieuDe'] ?></a></h3>
-                    <img class="images_news" src="upload/tintuc/<?php echo $row_tin['urlHinh'] ?>" align="left" />
+                    <h3 style="font-size: 19px;" class="title" ><a href="index.php?p=chitiettin&idTin=<?php echo $row_tin['idTin'] ?>"><?php echo $row_tin['TieuDe'] ?></a></h3>
+                    <img class="images_news" src="<?php echo $row_tin['urlHinh'] ?>" align="left" />
                     <div class="des"><?php echo $row_tin['TomTat'] ?></div>
                     <div class="clear"></div>
                    
@@ -56,7 +56,7 @@
 
 <style type="text/css">
     #phantrang {text-align: center;}
-    #phantrang a { background: #000; color: #ff0; padding: 5px; margin-right: 3px; }
+    #phantrang a { background: #000; color: #ff0; padding: 5px; margin-right: 3px; margin-bottom: 15px; margin-top: 15px;}
     #phantrang a:hover {background: #09F;}
 </style>
 <div id="phantrang">
@@ -68,6 +68,7 @@
     
 ?>
 <a <?php if($i == $trang)  echo "style='background: gray'"; ?>href="index.php?p=tintrongloai&idLT=<?php echo $idLT ?>&trang=<?php echo $i ?>"><?php echo $i ?></a>
+
 <?php  
     }
 ?>

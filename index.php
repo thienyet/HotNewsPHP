@@ -4,6 +4,7 @@
 
     require "lib/dbConn.php";
     require "lib/trangchu.php";
+    include('config.php');
 
     if(isset($_GET["p"]))
         $p = $_GET["p"];
@@ -12,6 +13,7 @@
  ?>
 
 <?php  
+    //account login
     if(isset($_POST["btn_submit"])) {
         $un = $_POST["username"];
         $pw = $_POST["password"];
@@ -29,19 +31,108 @@
             $_SESSION["Username"] = $row['Username'];
             $_SESSION["HoTen"] = $row['HoTen'];
             $_SESSION["idGroup"] = $row['idGroup'];
+            $_SESSION["user_email_address"] = $row['Email'];
         }
     }
+
+    //google login
+
+    $login_button = '';
+
+
+    if(isset($_GET["code"])) {
+
+        $token = $google_client->fetchAccessTokenWithAuthCode($_GET["code"]);
+
+        if(!isset($token['error'])) {
+
+            $google_client->setAccessToken($token['access_token']);
+            $_SESSION['access_token'] = $token['access_token'];
+            $google_service = new Google_Service_Oauth2($google_client);
+
+            $data = $google_service->userinfo->get();
+
+            if(!empty($data['given_name'])) {
+                $_SESSION['user_first_name'] = $data['given_name'];
+            }
+
+            if(!empty($data['family_name'])) {
+                $_SESSION['user_last_name'] = $data['family_name'];
+            }
+
+            if(!empty($data['email'])) {
+                $_SESSION['user_email_address'] = $data['email'];
+            }
+
+            if(!empty($data['gender'])) {
+                $_SESSION['user_gender'] = $data['gender'];
+            }
+
+            if(!empty($data['picture'])) {
+                $_SESSION['user_image'] = $data['picture'];
+            }
+
+            $_SESSION['HoTen'] = $_SESSION['user_first_name'].' '.$_SESSION['user_last_name'];
+
+            $conn = myConnect();
+
+            $sql = "SELECT * FROM users WHERE email='".$_SESSION['user_email_address']."'";
+            $result = mysqli_query($conn, $sql);
+
+
+            if(empty($result->fetch_assoc())){
+                $sql2 = "INSERT INTO users (HoTen, Email, idGroup, Active) VALUES ('".$_SESSION['HoTen']."', '".$_SESSION['user_email_address']."', '0', '1')"; 
+            } else {
+                $sql2 = "INSERT INTO users (HoTen, Email, idGroup, Active) VALUES ('".$_SESSION['HoTen']."', '".$_SESSION['user_email_address']."', '0', '1')";
+            }
+            mysqli_query($conn, $sql2);
+            
+        }
+    }
+
+    if(!isset($_SESSION['access_token'])){
+     //Create a URL to obtain user authorization
+     $login_button = '<a href="'.$google_client->createAuthUrl().'"><img src="images/GoogleSignUpDark.png" style="width:200px; height:auto;"/></a>';
+    }
+
+
 ?>
 
 <?php  
 //thoát
     if(isset($_POST["btn_thoat"])) {
-        unset($_SESSION["idUser"]);
-        unset($_SESSION["Username"]);
-        unset($_SESSION["HoTen"]);
-        unset($_SESSION["idGroup"]);
+        if(isset($_SESSION["HoTen"])) {
+            unset($_SESSION["idUser"]);
+            unset($_SESSION["Username"]);
+            unset($_SESSION["HoTen"]);
+            unset($_SESSION["idGroup"]);
+        } else if(isset($_SESSION['user_first_name'])) {
+            $login_button = '<a href="'.$google_client->createAuthUrl().'"><img src="sign-in-with-google.png" /></a>';
+            unset($_SESSION['access_token']);
+            unset($_SESSION['user_first_name']);
+            unset($_SESSION['user_last_name']);
+            unset($_SESSION['user_email_address']);
+            unset($_SESSION['user_gender']);
+            unset($_SESSION['user_image']);
+            $google_client->revokeToken();
+            session_destroy();
+        }
+        // } else if(isset($_SESSION['user_name'])) {
+        //     $facebook_login_url = '<div align="center"><a href="'.$facebook_login_url.'"><img src="php-login-with-facebook.gif" /></a></div>';
+        //     unset($_SESSION['access_token']);
+        //     unset($_SESSION['user_id']);
+        //     unset($_SESSION['user_name']);
+        //     unset($_SESSION['user_email_address']);
+        //     unset($_SESSION['user_image']);
+        //     session_destroy();
+        // }
+
+        // 
+        
     }
 ?>
+
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -56,12 +147,12 @@
 
 <body>
 <div id="wrap-vp">
-	<div id="header-vp">
-    	<div id="logo"><img src="images/logo.gif" /></div>
+    <div id="header-vp">
+        <div id="logo"><img src="images/logo.gif" /></div>
 
         <div style="float: right;">
             <?php  
-                if(isset($_SESSION['idUser']))  
+                if(isset($_SESSION['idUser']) || isset($_SESSION['user_first_name']))  
                 {  
                     require "blocks/formHello.php";}
                 else  
@@ -77,7 +168,7 @@
     </div>
     
     <div>
-    	<!--block/menu.php-->
+        <!--block/menu.php-->
         <?php require "blocks/menu.php" ?>
     </div>
       <div id="midheader-vp">
@@ -89,14 +180,14 @@
            </ul>
         </div>
         <div id="right">
-			<!--blocks/thongtinchung.php-->
+            <!--blocks/thongtinchung.php-->
             <?php require "blocks/thongtinchung.php" ?>
         </div>
     </div>
     <div class="clear"></div>
 
     <div id="slide-vp">
-    	<!--blocks/top_trang_chu.php-->
+        <!--blocks/top_trang_chu.php-->
         <?php require "blocks/top_trang_chu.php" ?>
 
         <div id="slide-right">
@@ -105,14 +196,14 @@
         </div>
     </div>
 
-  	<div id="content-vp">
-    	<div id="content-left">
-		<!--blocks/cot_trai.php-->
+    <div id="content-vp">
+        <div id="content-left">
+        <!--blocks/cot_trai.php-->
         <?php require "blocks/cot_trai.php" ?>
         </div>
         <div id="content-main">
-			
-			<!--PAGES-->
+            
+            <!--PAGES-->
             <?php 
                 switch ($p) {
                     case 'tintrongloai':
@@ -135,36 +226,26 @@
             
         </div>
         <div id="content-right">
-		<!--blocks/cot_phai.php-->
+        <!--blocks/cot_phai.php-->
 
         <?php require "blocks/cot_phai.php" ?>
         </div>
 
     <div class="clear"></div>
-    	
+        
     </div>
     
      <div id="thongtin">
-    	<!--blocks/thongtindoanhnghiep.php-->
+        <!--blocks/thongtindoanhnghiep.php-->
         <?php require "blocks/thongtindoanhnghiep.php" ?>
     </div>
     <div class="clear"></div>
     <div id="footer">
-    	<!--blocks/footer.php-->
+        <!--blocks/footer.php-->
         <?php require "blocks/footer.php" ?>
         
-        <div class="ft-bot">
-            <div class="bot1"><img src="images/logo.gif" /></div>
-            <div class="bot2">
-                     <p>© <span>Copyright 1997 VnExpress.net,</span>  All rights reserved</p>
-                     <p>® VnExpress giữ bản quyền nội dung trên website này.</p>
-            </div>
-            <div class="bot3">
-                
-                     <p><a href="http://fptad.net/qc/V/vnexpress/2014/07/">VnExpress tuyển dụng</a>   <a href="http://polyad.net/Polyad/Lien-he.htm">Liên hệ quảng cáo</a> / <a href="/contactus">Liên hệ Tòa soạn</a></p>
-                     <p><a href="http://vnexpress.net/contact.htm" target="_blank" style="color: #686E7A;font: 11px arial;padding: 0 4px;text-decoration: none;">Thông tin Tòa soạn: </a><span>0123.888.0123</span> (HN) - <span>0129.233.3555</span> (TP HCM)</p>
-                  
-            </div>
+        <div>
+            © Copyright VnExpress.net,  All rights reserved <br />® VnExpress giữ bản quyền nội dung trên website.
         </div>
     </div>
     
@@ -187,15 +268,12 @@
                     <span class="login100-form-title p-b-53">
                         Sign In With
                     </span>
+                    <?php
+                    if($login_button != ''){
+                        echo '<div align="center">'.$login_button . '</div>';
+                    }
+                    ?>
                     
-                    <a href="<?php $login_Url ?>" class="btn-face m-b-20">
-                    <i class="fa fa-facebook-official"></i>
-                    Facebook
-                </a>
-
-                    <a href="" class="btn-google m-b-20">
-                    <img src="img/icons/icon-google.png">
-                    Google
                 </a>
                 <br />
                     <fieldset>

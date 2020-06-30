@@ -4,7 +4,7 @@
     $qr = "
             select * 
             from tin
-            order by idTin desc
+            order by ngay desc
             limit 0,1
     ";
 	$result = mysqli_query($conn, $qr);
@@ -17,7 +17,7 @@
 		$qr = "
 	            select * 
 	            from tin
-	            order by idTin desc
+	            order by ngay desc
 	            limit 1,6
 	    ";
 	    
@@ -46,7 +46,7 @@
             select * 
             from tin
             where idLT = $idLT
-            order by idTin desc
+            order by ngay desc
             limit 0,1
     ";
 	$result = mysqli_query($conn, $qr);
@@ -60,8 +60,8 @@
 	            select * 
 	            from tin
 	            where idLT = $idLT
-	            order by idTin desc
-	            limit 1,4
+	            order by ngay desc
+	            limit 1,2
 	    ";
 	    
 		$result = mysqli_query($conn, $qr);
@@ -128,7 +128,7 @@
 	            select * 
 	            from tin
 	            where idTL = $idTL
-	            order by idTin desc
+	            order by ngay desc
 	            limit 0, 1
 	    ";
 	    
@@ -143,7 +143,7 @@
 	            select * 
 	            from tin
 	            where idTL = $idTL
-	            order by idTin desc
+	            order by ngay desc
 	            limit 1, 2
 	    ";
 	    
@@ -158,7 +158,7 @@
 	            select * 
 	            from tin
 	            where idLT = $idLT
-	            order by idTin desc
+	            order by ngay desc
 	    ";
 	    
 		$result = mysqli_query($conn, $qr);
@@ -186,7 +186,7 @@
 	            select * 
 	            from tin
 	            where idLT = $idLT
-	            order by idTin desc
+	            order by ngay desc
 	            limit $from, $sotin1trang
 	    ";
 	    
@@ -194,6 +194,7 @@
 
 	    return $result;
 	}
+
 
 	function ChiTietTin($idTin) {
 		$conn = myConnect();
@@ -241,7 +242,7 @@
 	            select * 
 	            from tin
 	            where TieuDe regexp '$tukhoa'
-	            order by idTin desc
+	            order by ngay desc
 
 	    ";
 	    
@@ -250,25 +251,32 @@
 	    return $result;
 	}
 
-	//Hàm login sau khi mạng xã hội trả dữ liệu về
-	function loginFromSocialCallBack($socialUser) {
-	    $conn = myConnect();
-	    $result = mysqli_query($con, "Select `idUser`,`Username`,`Email`,`HoTen` from `users` WHERE `email` ='" . $socialUser['email'] . "'");
-	    if ($result->num_rows == 0) {
-	        $result = mysqli_query($con, "INSERT INTO `users` (`HoTen`,`Email`, `idGroup`) VALUES ('" . $socialUser['name'] . "', '" . $socialUser['email'] . "', 0 ');");
-	        if (!$result) {
-	            echo mysqli_error($con);
-	            exit;
-	        }
-	        $result = mysqli_query($con, "Select `idUser`,`Username`,`Email`,`HoTen` from `users` WHERE `email` ='" . $socialUser['email'] . "'");
-	    }
-	    if ($result->num_rows > 0) {
-	        $user = mysqli_fetch_assoc($result);
-	        if (session_status() == PHP_SESSION_NONE) {
-	            session_start();
-	        }
-	        $_SESSION['current_user'] = $user;
-	        header('Location: ./index.php');
-	    }
+	function TimKiem_PhanTrang($tukhoa, $from, $sotin1trang) {
+		$conn = myConnect();
+		$qr = "
+	            select * 
+	            from tin
+	            where TieuDe regexp '$tukhoa'
+	            order by ngay desc
+	            limit $from, $sotin1trang
+	    ";
+	    
+		$result = mysqli_query($conn, $qr);
+
+	    return $result;
+	}
+
+	function DanhSachBinhLuan($idTin) {
+		$conn = myConnect();
+		$qr = "
+	            select * 
+	            from comment
+	            where idTin = $idTin
+	            order by id desc
+	    ";
+	    
+		$result = mysqli_query($conn, $qr);
+
+	    return $result;
 	}
 ?>
