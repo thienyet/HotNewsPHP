@@ -47,12 +47,13 @@
 	  	</tr>
 	  	<tr>
 	  		<td>
-	  			<h2>Danh Sach Tin</h2>
+	  			<h2>Danh Sách Tin</h2>
 	    	<table id="table_list"width="1000" border="0" align="center" cellpadding="0" cellspacing="0">
 			  	<tr>
-			    	<th>idTin</th>
+			    	<th>Mã Tin</th>
+			    	<th>Ngày Đăng</th>
 			    	<th>Tin</th>
-			    	<th>Tên</th>
+			    	<th>Thể Loại - Loại Tin</th>
 			    	<th>Số lần xem</th>
 			    	<th><a href="themTin.php">Thêm</a></th>
 			  	</tr>
@@ -62,12 +63,13 @@
 			  			ob_start();
 			  	?>
 	  			<tr>
-			    	<td>{idTin}<br/>Ngày: {Ngay}</td>
+			    	<td>{idTin}</td>
+			    	<td>{Ngay}</td>
 			    	<td style="width: 50%;"><a href="suatin.php?idTin={idTin}">{TieuDe}</a><br/>
 						<img style="float: left;margin-right: 5px;" src="{urlHinh}" alt="" width="152" height="96" />{TomTat}
 			    	</td>
-			    	<td>{TenTL}-{Ten}</td>
-			    	<td>Số lần xem: {SoLanXem}<br/>{TinNoiBat}-{AnHien}</td>
+			    	<td>{TenTL} - {Ten}</td>
+			    	<td>{SoLanXem}</td>
 			    	<td>
 			    		<a href="suatin.php?idTin={idTin}">Sửa</a>
 			    		<a onclick="return confirm('Bạn có chắc muốn xóa không?')" href="xoaTin.php?idTin={idTin}">Xóa</a>
@@ -83,8 +85,6 @@
 			  			$s = str_replace("{TenTL}", $row_tin["TenTL"], $s);
 			  			$s = str_replace("{Ten}", $row_tin["Ten"], $s);
 			  			$s = str_replace("{SoLanXem}", $row_tin["SoLanXem"], $s);
-			  			$s = str_replace("{TinNoiBat}", $row_tin["TinNoiBat"], $s);
-			  			$s = str_replace("{AnHien}", $row_tin["AnHien"], $s);
 			  			echo $s;
 			  		}
 			  	?>

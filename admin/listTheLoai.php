@@ -47,15 +47,14 @@
 	  	</tr>
 	  	<tr>
 	  		<td>
-	  			<h2>Danh Sach The Loai</h2>
+	  			<h2>Danh Sách Thể Loại</h2>
 	    	<table id="table_list"width="1000" border="0" align="center" cellpadding="0" cellspacing="0">
 			  	<tr>
-			    	<th>idTL</th>
-			    	<th>TenTL</th>
-			    	<th>TenTL_KhongDau</th>
-			    	<th>ThuTu</th>
-			    	<th>AnHien</th>
-			    	<th><a href="themTheLoai.php">Them</a></th>
+			    	<th>Mã Thể Loại</th>
+			    	<th>Tên Thể Loại</th>
+			    	<th>Tên Thể Loại Không Dấu</th>
+			    	<th>Thứ Tự</th>
+			    	<th><a href="themTheLoai.php">Thêm</a></th>
 			  	</tr>
 			  	<?php  
 			  		$theloai = DanhSachTheLoai();
@@ -67,10 +66,9 @@
 			    	<td>{TenTL}</td>
 			    	<td>{TenTL_KhongDau}</td>
 			    	<td>{ThuTu}</td>
-			    	<td>{AnHien}</td>
 			    	<td>
-			    		<a href="suaTheLoai.php?idTL={idTL}">Sua</a>
-			    		<a onclick="return confirm('Bạn có chắc muốn xóa không?')" href="xoaTheLoai.php?idTL={idTL}">Xoa</a>
+			    		<a href="suaTheLoai.php?idTL={idTL}">Sửa</a>
+			    		<a onclick="return confirm('Bạn có chắc muốn xóa không?')" href="xoaTheLoai.php?idTL={idTL}">Xóa</a>
 			    	</td>
 			  	</tr>
 			  	<?php  
@@ -79,7 +77,6 @@
 			  			$s = str_replace("{TenTL}", $row_theloai["TenTL"], $s);
 			  			$s = str_replace("{TenTL_KhongDau}", $row_theloai["TenTL_KhongDau"], $s);
 			  			$s = str_replace("{ThuTu}", $row_theloai["ThuTu"], $s);
-			  			$s = str_replace("{AnHien}", $row_theloai["AnHien"], $s);
 			  			echo $s;
 			  		}
 			  	?>

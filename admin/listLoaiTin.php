@@ -47,16 +47,15 @@
 	  	</tr>
 	  	<tr>
 	    	<td>
-	    		<h2>Danh Sach Loai Tin</h2>
+	    		<h2>Danh Sách Loại Tin</h2>
 	    	<table id="table_list"width="1000" border="0" align="center" cellpadding="0" cellspacing="0">
 			  	<tr>
-			    	<th>idLT</th>
-			    	<th>TenLT</th>
-			    	<th>TenLT_KhongDau</th>
-			    	<th>ThuTu</th>
-			    	<th>AnHien</th>
-			    	<th>IDTL</th>
-			    	<th><a href="themLoaiTin.php">Them</a></th>
+			    	<th>Mã Loại Tin</th>
+			    	<th>Tên Loại Tin</th>
+			    	<th>Tên Loại Tin Không Dấu</th>
+			    	<th>Thứ Tự</th>
+			    	<th>Thể Loại</th>
+			    	<th><a href="themLoaiTin.php">Thêm</a></th>
 			  	</tr>
 			  	<?php  
 			  		$loaitin = DanhSachLoaiTin();
@@ -68,11 +67,10 @@
 			    	<td>{Ten}</td>
 			    	<td>{Ten_KhongDau}</td>
 			    	<td>{ThuTu}</td>
-			    	<td>{AnHien}</td>
 			    	<td>{TenTL}</td>
 			    	<td>
-			    		<a href="suaLoaiTin.php?idLT={idLT}">Sua</a>
-			    		<a onclick="return confirm('Bạn có chắc muốn xóa không?')" href="xoaLoaiTin.php?idLT={idLT}">Xoa</a>
+			    		<a href="suaLoaiTin.php?idLT={idLT}">Sửa</a>
+			    		<a onclick="return confirm('Bạn có chắc muốn xóa không?')" href="xoaLoaiTin.php?idLT={idLT}">Xóa</a>
 			    	</td>
 			  	</tr>
 			  	<?php  
@@ -81,7 +79,6 @@
 			  			$s = str_replace("{Ten}", $row_loaitin["Ten"], $s);
 			  			$s = str_replace("{Ten_KhongDau}", $row_loaitin["Ten_KhongDau"], $s);
 			  			$s = str_replace("{ThuTu}", $row_loaitin["ThuTu"], $s);
-			  			$s = str_replace("{AnHien}", $row_loaitin["AnHien"], $s);
 			  			$s = str_replace("{TenTL}", $row_loaitin["TenTL"], $s);
 			  			echo $s;
 			  		}

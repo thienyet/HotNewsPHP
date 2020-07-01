@@ -29,9 +29,8 @@
         $NoiDung= $_POST["comment_text"];
 
         $conn = myConnect();
-        echo $qr = "insert into comment values(null, '$HoTen', '$Email', '$NoiDung', '$idTin')  ";
+        $qr = "insert into comment values(null, '$HoTen', '$Email', '$NoiDung', '$idTin')  ";
         mysqli_query($conn, $qr);
-        header("location:chitiettin.php");
     }
 ?>
 
@@ -76,7 +75,7 @@
     if(isset($_SESSION["HoTen"])) {
 ?>
     <!-- comment form -->
-    <form class="clearfix" action="index.php" method="POST" id="comment_form">
+    <form class="clearfix" action="" method="POST" id="comment_form">
         <h4>Post a comment:</h4>
         <textarea name="comment_text" id="comment_text" class="form-control" cols="30" rows="3"></textarea>
         <input type="submit" name="btn_cmt" value="Bình luận">
@@ -87,18 +86,18 @@
 <?php  }?>
 
     <!-- Display total number of comments on this post  -->
-    <h4><span id="comments_count">0</span> Comment(s)</h4>
+    <h4><span id="comments_count"><?php echo $tongcmt = mysqli_num_rows($comment); ?></span> Comment(s)</h4>
     <hr>
     <!-- comments wrapper -->
     <div id="comments-wrapper">
         <div class="comment clearfix">
             <?php while($row_comment = mysqli_fetch_array($comment)) { ?>
-                <img src="../upload/user.png" alt="" class="profile_pic">
+                
                 <div class="comment-details">
+                    <span><img src="images/user.png" alt="" class="profile_pic" style="width: 15px; height: 15px;"></span>
                     <span class="comment-name"><?php echo $row_comment['hoten'] ?></span>
-                    <span class="comment-date"><?php echo date("Y/m/d") ?></span>
-                    <p><?php echo $row_comment['noidung'] ?></p>
-                    <a class="reply-btn" href="#" >reply</a>
+                    <span class="comment-date"> - <?php echo date("Y/m/d") ?></span>
+                    <p>- <?php echo $row_comment['noidung'] ?></p>
                 </div>
             <?php } ?>
         </div>

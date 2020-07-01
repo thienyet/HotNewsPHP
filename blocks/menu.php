@@ -63,7 +63,6 @@ ddsmoothmenu.init({
 <?php  
 	}
 ?>
-
 </ul>
 <br style="clear: left" />
 </div>
