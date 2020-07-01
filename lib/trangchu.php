@@ -32,7 +32,7 @@
 	            select * 
 	            from tin
 	            order by SoLanXem desc
-	            limit 1,4
+	            limit 1,6
 	    ";
 	    
 		$result = mysqli_query($conn, $qr);
@@ -40,18 +40,18 @@
     	return $result;
 	}
 
-		function TinMoiNhat_TheoLoaiTin_MotTin($idLT) {
-    $conn = myConnect();
-    $qr = "
-            select * 
-            from tin
-            where idLT = $idLT
-            order by ngay desc
-            limit 0,1
-    ";
-	$result = mysqli_query($conn, $qr);
+	function TinMoiNhat_TheoLoaiTin_MotTin($idLT) {
+		$conn = myConnect();
+		$qr = "
+		        select * 
+		        from tin
+		        where idLT = $idLT
+		        order by ngay desc
+		        limit 0,1
+		";
+		$result = mysqli_query($conn, $qr);
 
-    return $result;
+		return $result;
 	}
 
 	function TinMoiNhat_TheoLoaiTin_BonTin($idLT) {
@@ -120,6 +120,18 @@
 		$result = mysqli_query($conn, $qr);
 
 	    return $result;
+	}
+
+	function DanhSachTin_Theo_TheLoai($idTL) {
+		$conn = myConnect();
+		$qr = "
+	            select * 
+	            from tin
+	            where idTL = $idTL
+	    ";
+	    
+		$result = mysqli_query($conn, $qr);		
+	    return mysqli_num_rows($result);
 	}
 
 	function TinMoi_BenTrai($idTL) {

@@ -65,7 +65,7 @@
 	  			<tr>
 			    	<td>{idTin}</td>
 			    	<td>{Ngay}</td>
-			    	<td style="width: 50%;"><a href="suatin.php?idTin={idTin}">{TieuDe}</a><br/>
+			    	<td style="width: 40%;"><a href="suatin.php?idTin={idTin}">{TieuDe}</a><br/>
 						<img style="float: left;margin-right: 5px;" src="{urlHinh}" alt="" width="152" height="96" />{TomTat}
 			    	</td>
 			    	<td>{TenTL} - {Ten}</td>

@@ -19,8 +19,8 @@ ul{ list-style:none}
 
 
 
-#wrap-vp{ width:1000px; margin:15px auto}
-#header-vp{ height:70px;}
+#wrap-vp{ width:1000px; margin:15px auto; }
+#header-vp{ height:90px;}
 	#logo{ width:300px; float:left; margin-top:5px}
 	
 #menu-vp{ border-bottom:3px solid #CCC; padding:0 0 3px 0px}
@@ -39,7 +39,7 @@ ul{ list-style:none}
 	#midheader-vp #right .txt_input{background: none repeat scroll 0 0 #FFFFFF; float: left;height: 18px;padding: 0 5px 0 4px;width: 165px;border-bottom: 1px solid #C0C0C0;border-left: 1px solid #C0C0C0;border-top: 1px solid #C0C0C0; float:left}
 	#midheader-vp #right .txt_24h{ background:#CCC; color:#333; font-size:12px; height:18px; padding :2px 3px 0 3px}
 	
-#slide-vp{ margin-top:7px; border-bottom:1px solid #CCC; min-height:425px}
+#slide-vp{ margin-top:7px; border-bottom:1px solid #CCC; min-height:400px}
 	#slide-left{ width:70%; float:left}
 	#slideleft-main{ width:71%; float:left}
 	#slideleft-main .title a{ color:#900}
@@ -112,7 +112,8 @@ ul{ list-style:none}
 	#footer .bot1{ width:23%}
 	#footer .bot2{ width:30%}
 	#footer .bot3{ width:47%; float:right; text-align:right}
-	
+	#footer #footer_bottom {width:100%; margin: 0; padding: 0;}
+
 	
 	
 	

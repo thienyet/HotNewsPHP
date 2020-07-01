@@ -2,11 +2,13 @@
     $theloai = DanhSachTheLoai();
     while($row_theloai = mysqli_fetch_array($theloai)) {
         $idTL = $row_theloai['idTL'];
+        $tongTin = DanhSachTin_Theo_TheLoai($idTL);
+        if($tongTin > 0) {
 ?>
 <div class="box-cat">
 	<div class="cat">
     	<div class="main-cat">
-        	<a href="#"><?php echo $row_theloai['TenTL'] ?></a>
+        	<a href="#"><?php echo $row_theloai['TenTL']; ?></a>
         </div>
         <div class="child-cat">
             <?php  
@@ -52,6 +54,6 @@
 
 <!-- box cat-->
 <?php 
-    } 
+    }} 
 ?>
 

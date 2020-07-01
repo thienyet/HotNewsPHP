@@ -92,7 +92,7 @@
 
     if(!isset($_SESSION['access_token'])){
      //Create a URL to obtain user authorization
-     $login_button = '<a href="'.$google_client->createAuthUrl().'"><img src="images/GoogleSignUpDark.png" style="width:200px; height:auto;"/></a>';
+     $login_button = '<a href="'.$google_client->createAuthUrl().'"><img src="images/google.png" style="width:200px; height:auto;"/></a>';
     }
 
 
@@ -107,7 +107,7 @@
             unset($_SESSION["HoTen"]);
             unset($_SESSION["idGroup"]);
         } else if(isset($_SESSION['user_first_name'])) {
-            $login_button = '<a href="'.$google_client->createAuthUrl().'"><img src="sign-in-with-google.png" /></a>';
+            $login_button = '<a href="'.$google_client->createAuthUrl().'"><img src="images/google.png" style="width:200px; height:auto;"/></a>';
             unset($_SESSION['access_token']);
             unset($_SESSION['user_first_name']);
             unset($_SESSION['user_last_name']);
@@ -117,17 +117,6 @@
             $google_client->revokeToken();
             session_destroy();
         }
-        // } else if(isset($_SESSION['user_name'])) {
-        //     $facebook_login_url = '<div align="center"><a href="'.$facebook_login_url.'"><img src="php-login-with-facebook.gif" /></a></div>';
-        //     unset($_SESSION['access_token']);
-        //     unset($_SESSION['user_id']);
-        //     unset($_SESSION['user_name']);
-        //     unset($_SESSION['user_email_address']);
-        //     unset($_SESSION['user_image']);
-        //     session_destroy();
-        // }
-
-        // 
         
     }
 ?>
@@ -143,6 +132,14 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+      table {
+         margin-left: 30%;
+      }
+      table tr td{
+        padding: 10px;
+      }
+  </style>
 </head>
 
 <body>
@@ -243,14 +240,13 @@
     <div id="footer">
         <!--blocks/footer.php-->
         <?php require "blocks/footer.php" ?>
-        
-        <div>
-            © Copyright VnExpress.net,  All rights reserved <br />® VnExpress giữ bản quyền nội dung trên website.
+
+        <div id="footer_bottom">
+            © Copyright VnExpress.net,  All rights reserved<br />
+            ® VnExpress giữ bản quyền nội dung trên website này.
         </div>
+    
     </div>
-    
-    
-    
     
 </div>
 
@@ -262,12 +258,12 @@
            <div class="modal-content">  
                 <div class="modal-header">  
                      <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                     <h4 class="modal-title">Login</h4>  
+                     <h4 class="modal-title" align="center">Đăng nhập để trải nghiệm nhiều hơn</h4>  
                 </div>  
                 <form method="POST" action="">
-                    <span class="login100-form-title p-b-53">
-                        Sign In With
-                    </span>
+                    <h4 class="login100-form-title p-b-53" align="center">
+                        Đăng nhập với
+                    </h4>
                     <?php
                     if($login_button != ''){
                         echo '<div align="center">'.$login_button . '</div>';
@@ -282,6 +278,7 @@
                                 <td>Username</td>
                                 <td><input type="text" name="username" maxlength="80"></td>
                             </tr>
+                            <hr />
                             <tr>
                                 <td>Password</td>
                                 <td><input type="password" name="password" maxlength="80"></td>
@@ -295,3 +292,4 @@
            </div>  
       </div>  
  </div>  
+

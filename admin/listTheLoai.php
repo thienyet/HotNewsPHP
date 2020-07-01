@@ -15,11 +15,13 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Admin</title>
 	<link rel="stylesheet" type="text/css" href="layout.css" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<style>
 	#table_list {
 	  font-family: arial, sans-serif;
 	  border-collapse: collapse;
 	  width: 100%;
+	  margin-top: 5px;
 	}
 
 	#table_list td,#table_list th {
@@ -48,13 +50,14 @@
 	  	<tr>
 	  		<td>
 	  			<h2>Danh Sách Thể Loại</h2>
+	  			<a href="themTheLoai.php"><button type="button" class="btn btn-info">Thêm mới</button></a>
 	    	<table id="table_list"width="1000" border="0" align="center" cellpadding="0" cellspacing="0">
 			  	<tr>
 			    	<th>Mã Thể Loại</th>
 			    	<th>Tên Thể Loại</th>
 			    	<th>Tên Thể Loại Không Dấu</th>
 			    	<th>Thứ Tự</th>
-			    	<th><a href="themTheLoai.php">Thêm</a></th>
+			    	<th>Hành Động</th>
 			  	</tr>
 			  	<?php  
 			  		$theloai = DanhSachTheLoai();
@@ -67,8 +70,8 @@
 			    	<td>{TenTL_KhongDau}</td>
 			    	<td>{ThuTu}</td>
 			    	<td>
-			    		<a href="suaTheLoai.php?idTL={idTL}">Sửa</a>
-			    		<a onclick="return confirm('Bạn có chắc muốn xóa không?')" href="xoaTheLoai.php?idTL={idTL}">Xóa</a>
+			    		<a href="suaTheLoai.php?idTL={idTL}"><button type="button" class="btn btn-primary">Sửa</button></a>
+			    		<a onclick="return confirm('Bạn có chắc muốn xóa không?')" href="xoaTheLoai.php?idTL={idTL}"><button type="button" class="btn btn-danger">Xóa</button></a>
 			    	</td>
 			  	</tr>
 			  	<?php  
